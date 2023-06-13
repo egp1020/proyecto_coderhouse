@@ -32,8 +32,18 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'listado_profesores' %}">Profesores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'listado_estudiantes' %}">Estudiantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'listado_cursos' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Iniciar sesión</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Crear cuenta</a></li>
+                        {% if request.user.is_authenticated %}
+                        <a class="navbar-brand" href="{% url 'mostrar_perfil' %}">
+                            {% if request.user.account.avatar %}
+                            <img src={{request.user.account.avatar.url}} alt="" height="50px" class="rounded-circle">
+                            {% endif %}
+                            {{request.user.username}}
+                        </a>
+                        <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Crear cuenta</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

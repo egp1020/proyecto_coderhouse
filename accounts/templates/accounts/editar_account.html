@@ -2,12 +2,15 @@
 
 {% load static %}
 
-{% block title %} Accounts {% endblock title %}
+{% block title %} Editar account {% endblock title %}
 
 {% block main %}
-    <form method="POST" class="m-2">
+    <form method="POST" class="m-2" enctype='multipart/form-data'>
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Enviar" class="btn btn-primary">
+        <input type="submit" value="Editar" class="btn btn-primary">
     </form>
+    <div>
+        <a href="{% url 'cambiar_password' %}" class="m-2 btn btn-primary">Cambiar contraseña</a>
+    </div>
 {% endblock main %}

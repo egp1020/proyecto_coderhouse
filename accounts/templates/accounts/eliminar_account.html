@@ -2,12 +2,13 @@
 
 {% load static %}
 
-{% block title %} Accounts {% endblock title %}
+{% block title %} Eliminar accounts {% endblock title %}
 
 {% block main %}
-    <form action="{% url 'eliminar_curso' object.id %}" method="POST" class="m-2">
+    <form action="{% url 'eliminar_perfil' user.id %}" method="POST" class="m-2">
         {% csrf_token %}
         <p>Desea eliminar el curso?</p>
         <input type="submit" value="Confirmar" class="btn btn-primary">
+        <a href="{% url 'home' %}""><button class="btn btn-primary m-2" type="button">Cancelar</button></a>
     </form>
 {% endblock main %}

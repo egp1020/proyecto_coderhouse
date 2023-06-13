@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Curso {% endblock title %}
+{% block title %} Account {% endblock title %}
 
 {% block main %}
-    <div>
-        <a href="{% url 'listado_Accounts' %}" class="m-2 btn btn-primary">Listar Accounts</a>
-    </div>
-    {% if curso %}
-        <div class="row">
-            <div class="card m-2" style="width: 18rem;" >
-                <div class="card-body">
-                <h5 class="card-title">{{ curso.nombre }}</h5>
-                <p class="card-text">Camada: {{ curso.camada }}</p>
+    <div class="col-8">
+        <div class="card m-2" style="border-radius: 15px;">
+            <div class="card-body p-4">
+                <div class="d-flex text-black">
+                    <div class="flex-shrink-0">
+                        {% if request.user.account.avatar %}
+                            <img src={{request.user.account.avatar.url}} alt="avatar" style="width: 60px; height:50px;" class="rounded-circle img-fluid">
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h5 class="mb-1">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
+                        <p class="mb-2 pb-1" style="color: #2b2a2a;">Email: {{request.user.email}}</p>
+                    </div>
                 </div>
             </div>
         </div>
-    {% else %}
-        <div class="card" style="width: 18rem;" >
-            <div class="card-body">
-                <p class="card-text">No se encontraron datos.</p>
-            </div>
-        </div>
-    {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'editar_perfil' %}" class="m-2 btn btn-primary">Editar perfil</a>
+        <a href="{% url 'eliminar_perfil' user.id %}" class="m-2 btn btn-primary">Eliminar perfil</a>
+    </div>
 
 {% endblock main %}
