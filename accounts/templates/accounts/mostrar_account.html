@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Curso {% endblock title %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'listado_Accounts' %}" class="m-2 btn btn-primary">Listar Accounts</a>
+    </div>
+    {% if curso %}
+        <div class="row">
+            <div class="card m-2" style="width: 18rem;" >
+                <div class="card-body">
+                <h5 class="card-title">{{ curso.nombre }}</h5>
+                <p class="card-text">Camada: {{ curso.camada }}</p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="card" style="width: 18rem;" >
+            <div class="card-body">
+                <p class="card-text">No se encontraron datos.</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock main %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Estudiantes {% endblock title %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'crear_estudiante' %}" class="m-2 btn btn-primary">Crear estudiante</a>
+    </div>
+    {% if object_list %}
+        <div class="row">
+            {% for estudiante in object_list %}
+                <div class="card m-2" style="width: 18rem;" >
+                    <div class="card-body">
+                    <h5 class="card-title">{{ estudiante.nombre }} {{ estudiante.apellido }}</h5>
+                    <p class="card-text">email: {{ estudiante.email }}</p>
+                    <a href="{% url 'mostrar_estudiante' estudiante.id %}" class="btn btn-primary">Ver</a>
+                    <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'eliminar_estudiante' estudiante.id %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card" style="width: 18rem;" >
+            <div class="card-body">
+                <p class="card-text">No se encontraron datos.</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock main %}
