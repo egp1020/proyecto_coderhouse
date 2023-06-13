@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView, LogoutView
 
@@ -43,6 +43,7 @@ def register(request):
     form = forms.RegistroUsuarioForm()
     return render(request, "accounts/crear_account.html", {"form":form})
 
+@login_required
 def editar_perfil(request):
     usuario = request.user
     modelo_perfil, _ = models.Account.objects.get_or_create(user=usuario)
@@ -73,6 +74,7 @@ def editar_perfil(request):
     )
     return render(request, 'accounts/editar_account.html', {'form': form})
 
+@login_required
 def mostrar_perfil(request):
     return render(request, 'accounts/mostrar_account.html')
 

@@ -5,7 +5,9 @@
 
 {% block main %}
     <div>
-        <a href="{% url 'crear_estudiante' %}" class="m-2 btn btn-primary">Crear estudiante</a>
+        {% if perms.estudiante.add_movie %}
+            <a href="{% url 'crear_estudiante' %}" class="m-2 btn btn-primary">Crear estudiante</a>
+        {% endif %}
     </div>
     {% if object_list %}
         <div class="row">
@@ -15,8 +17,12 @@
                     <h5 class="card-title">{{ estudiante.nombre }} {{ estudiante.apellido }}</h5>
                     <p class="card-text">email: {{ estudiante.email }}</p>
                     <a href="{% url 'mostrar_estudiante' estudiante.id %}" class="btn btn-primary">Ver</a>
-                    <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-primary">Editar</a>
-                    <a href="{% url 'eliminar_estudiante' estudiante.id %}" class="btn btn-primary">Borrar</a>
+                    {% if perms.estudiante.change_movie %}
+                        <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-primary">Editar</a>
+                    {% endif %}
+                    {% if perms.estudiante.delete_movie %}
+                        <a href="{% url 'eliminar_estudiante' estudiante.id %}" class="btn btn-primary">Borrar</a>
+                    {% endif %}
                     </div>
                 </div>
             {% endfor %}
