@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profesores {% endblock title %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'crear_profesor' %}" class="m-2 btn btn-primary">Crear profesor</a>
+    </div>
+    {% if object_list %}
+        <div class="row">
+            {% for profesor in object_list %}
+                <div class="card m-2" style="width: 18rem;" >
+                    <div class="card-body">
+                    <h5 class="card-title">{{ profesor.nombre }} {{ profesor.apellido }}</h5>
+                    <p class="card-text">email: {{ profesor.email }}</p>
+                    <a href="{% url 'mostrar_profesor' profesor.id %}" class="btn btn-primary">Ver</a>
+                    <a href="{% url 'editar_profesor' profesor.id %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'eliminar_profesor' profesor.id %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card" style="width: 18rem;" >
+            <div class="card-body">
+                <p class="card-text">No se encontraron datos.</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock main %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Eliminar perfil {% endblock title %}
+
+{% block main %}
+    <form action="{% url 'eliminar_perfil' object.id %}" method="POST" class="m-2">
+        {% csrf_token %}
+        <p>Desea eliminar el perfil?</p>
+        <input type="submit" value="Confirmar" class="btn btn-primary">
+    </form>
+{% endblock main %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Mostrar perfil {% endblock title %}
+
+{% block main %}
+    <div class="row">
+        <div class="card m-2" style="width: 18rem;" >
+            <div class="card-body">
+            <h5 class="card-title">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
+            <p class="card-text">Email: {{ request.user.email }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;" >
+    </div>
+
+{% endblock main %}
